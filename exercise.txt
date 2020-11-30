@@ -1,0 +1,9 @@
+A feladatban egy transform stream segítségével a star-wars-opening-crawl.txt tartalmát fogjuk morzejelekre 'lefordítani', az eredményt egy másik fájlba írjuk, majd ennek a másik fájlnak a tartalmát fogjuk visszaalakítani az eredeti szöveggé.
+Készíts egy morse-service modult, ami két függvény exportál:
+fromMose - ez a paraméterében megkapott streamben levő karaktereket fogja motzejelekké alakítani
+toMorse - ez pedig a paraméterében megkapott streamben levő morzejeleket fogja visszaállítani.
+
+A morse-service.js-ben találsz egy objectet, ami a morzejeleket összerendeli a hozzájuk tartozó karakterrel.
+A morzejelek elválasztásához tetszőleges kataktert használhatsz (pl. ..-|..|--)
+
+A visszaalakításnál figyelj arra, hogy a morzejelek több karakterből is állhatnak (pl. ..- 3 karakter), emiatt lehet hogy egy morzejel két részre 'törik', az egyik része megérkezik egy chunk végén, a másik pedig a következő chunk elejém.
