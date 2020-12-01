@@ -53,8 +53,6 @@ const morseMap = {  //object, összerendeli a morze jeleket a karakterekkel
 };
 morseMap[os.EOL] = os.EOL;
 
-const separator = "#";
-
 const toMorse = new Transform({
   transform(chunk, encoding, callback){ //a transform metódusban alakítjuk át a chunk-ot
     this.push(chunk //push metódussal átadjuk a transform stream-nek az átalakított adatokat
