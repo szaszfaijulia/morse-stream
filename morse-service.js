@@ -1,6 +1,8 @@
 const stream = require('stream');
 const os = require('os');
 
+const { Transform } = require('stream');
+
 const morseMap = {
     'A': '.-',
     'B': '-...',
@@ -51,13 +53,31 @@ const morseMap = {
 };
 morseMap[os.EOL] = os.EOL;
 
-function toMorse() {
-  
-}
+const separator = "#";
 
-function fromMorse() {
-  
-}
+const toMorse = new Transform({
+  transform(chunk, encoding, callback){ //a transform metódusban alakítjuk át a chunk-ot
+    this.push(chunk //push metódussal átadjuk a transform stream-nek az átalakított adatokat
+      .toString()
+      .split('')
+      .map(i => morseMap[i])
+      .join('#'));  //morze jelek elválasztása # karakterrel
+    callback(); //callback-el jelezzük a transform stream-nek, hogy befejeztük a chunk feldolgozását
+  }
+})
+
+const fromMorse = new Transform({
+  transform(chunk, encoding, callback) {
+    this.push(chunk
+      .toString()
+      .split('#')
+      .map(morse => Object
+        .keys(morseMap)
+        .find(i => morseMap[i] === morse))
+      .join(''));
+  callback();
+  }
+})
 
 module.exports = {
     toMorse,
